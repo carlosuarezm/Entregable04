@@ -130,7 +130,7 @@ class CartManager {
                 if (productAddedIndex > 0) {
                     cart.products[productAddedIndex].quantity = cart.products[productAddedIndex].quantity + productToAdd.quantity
                 } else {
-                    cart.products.push({ id: productToAdd.id, quantity: productToAdd.quantity })
+                    cart.products.push({ id: Number(productToAdd.id), quantity: productToAdd.quantity })
                 }
                 await this.saveCarts()
             } else {
@@ -142,25 +142,6 @@ class CartManager {
             throw new Error('The product is not valid')
         }
 
-    }
-
-    async deleteProduct(id) {
-        //Buscamos el objeto que coincida con el id recibido
-        let product = await this.getCartById(id)
-        //Buscamos el indice del objeto encontrado
-        let productIndex = this.carts.indexOf(product)
-        //Verificamos si se encontró el producto en el array
-        if (productIndex < 0) {
-            //Mensaje en caso que no se haya encontrado coincidencia
-            throw new Error(`Product not found`)
-        } else {
-            //En caso de encontrar eliminamos la posicion del array correspondiente con el id recibido
-            product = this.carts.splice(productIndex)
-            //Guardamos el nuevo contenido en el archivo de la ruta path
-            await this.saveCarts()
-            //Mensaje de confirmación de que se ha eliminado el producto
-            console.log(`The product has been deleted`, product)
-        }
     }
 
 }

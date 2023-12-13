@@ -6,8 +6,6 @@ const router = Router()
 const prodcutMgr = new ProductManager("./src/products.json")
 const cartMgr = new CartManager("./src/carts.json", prodcutMgr)
 
-const carts = []
-
 router.get('/', async (req, res) => {
     try {
         let carts = await cartMgr.getCarts()
