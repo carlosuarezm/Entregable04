@@ -125,8 +125,7 @@ class CartManager {
             if (product && product.stock >= productToAdd.quantity) {
                 product.stock = product.stock - productToAdd.quantity
                 await this.productManager.updateProduct(product)
-                let productAdded = cart.products.find((p) => p.id == product.id)
-                let productAddedIndex = cart.products.indexOf(productAdded)
+                let productAddedIndex = cart.products.findIndex((p) => p.id == product.id)
                 if (productAddedIndex > 0) {
                     cart.products[productAddedIndex].quantity = cart.products[productAddedIndex].quantity + productToAdd.quantity
                 } else {
